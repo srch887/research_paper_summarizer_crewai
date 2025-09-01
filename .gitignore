@@ -1,0 +1,6 @@
+.env
+.venv
+.vscode
+research_paper_summary.md
+research_paper_summarizer.ipynb
+__pycache__
