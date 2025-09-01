@@ -16,6 +16,7 @@ from pypdf import PdfReader
 import os
 import io
 import re
+import sys
 import requests
 from dotenv import load_dotenv
 
@@ -150,8 +151,15 @@ crew = Crew(
 
 
 if __name__ == '__main__':
-    # url = input()
-    result = crew.kickoff(inputs={'research_paper_link': "https://arxiv.org/pdf/1504.00113"})
+    if len(sys.argv) < 2:
+        print("Usage: python research_paper_summarizer.py <RESEARCH_PAPER_URL>")
+        sys.exit(1)
+
+    research_paper_link = sys.argv[1]
+
+    result = crew.kickoff(inputs={'research_paper_link': research_paper_link})
 
     with open("research_paper_summary.md", "w", encoding="utf-8") as f:
         f.write(result.raw)
+
+    print(f"Summary written to ./research_paper_summary.md")
